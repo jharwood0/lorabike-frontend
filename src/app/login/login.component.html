@@ -1,0 +1,30 @@
+<div fxLayout="row" fxLayoutAlign="center center" style="height: 100%;">
+  <div class="login mat-elevation-z12">
+    <div class="login-header" fxLayout="column" fxLayoutAlign="center center">
+      <img src="assets/img/icon.png">
+    </div>
+    <div>
+      <md-progress-bar *ngIf="isLoading" class="example-margin" [color]="'primary'" [mode]="'indeterminate'">
+      </md-progress-bar>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <ul class="errors-list" *ngIf="errors.length >= 1">
+        <li class="errors-list-item" *ngFor="let error of errors">{{error.message}}</li>
+      </ul>
+    </div>
+    <form #form="ngForm" (ngSubmit)="login()">
+      <div class="login-content" fxLayout="column" fxLayoutAlign="start stretch">
+        <md-input-container>
+          <input mdInput placeholder="Username" type="text" name="username" required [(ngModel)]="username">
+        </md-input-container>
+        <md-input-container>
+          <input mdInput placeholder="Password" type="password" name="password" required [(ngModel)]="password">
+        </md-input-container>
+        <div class="extra-options" fxLayout="row" fxLayoutAlign="space-between center">
+          <a class="forgot-password" [routerLink]="['/forgot-password']">Forgot Password?</a>
+        </div>
+        <button color="primary" md-raised-button [disabled]="!form.valid || isLoading">SIGN IN</button>
+      </div>
+    </form>
+  </div>
+</div>
