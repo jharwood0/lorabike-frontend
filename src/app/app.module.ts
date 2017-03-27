@@ -55,7 +55,8 @@ const appRoutes = [
         component: OverviewComponent
       }
     ]
-  }
+  },
+  { path: '',   redirectTo: '/login', pathMatch: 'full' },
 ]
 
 @NgModule({

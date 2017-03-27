@@ -3,10 +3,19 @@
     <div class="register-header" fxLayout="column" fxLayoutAlign="center center">
       <img src="assets/img/icon.png">
     </div>
+    <div>
+      <md-progress-bar *ngIf="isLoading" class="example-margin" [color]="'primary'" [mode]="'indeterminate'">
+      </md-progress-bar>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <ul class="errors-list" *ngIf="errors.length >= 1">
+        <li class="errors-list-item" *ngFor="let error of errors">{{error.message}}</li>
+      </ul>
+    </div>
     <form #form="ngForm" (ngSubmit)="register()">
       <div class="register-content" fxLayout="column" fxLayoutAlign="start stretch">
         <md-input-container>
-          <input mdInput placeholder="Name" type="text" name="name" required [(ngModel)]="name">
+          <input mdInput placeholder="Username" type="text" name="username" required [(ngModel)]="username">
         </md-input-container>
         <md-input-container>
           <input mdInput placeholder="E-Mail" type="text" name="email" required [(ngModel)]="email">
@@ -17,10 +26,7 @@
         <md-input-container>
           <input mdInput placeholder="Password (Confirm)" type="password" name="password-confirm" required [(ngModel)]="passwordConfirm">
         </md-input-container>
-        <div class="extra-options" fxLayout="row" fxLayoutAlign="center center">
-          <md-checkbox class="remember-me">I accept the <a href="#">terms and conditions.</a></md-checkbox>
-        </div>
-        <button color="primary" md-raised-button [disabled]="!form.valid">CREATE ACCOUNT</button>
+        <button color="primary" md-raised-button [disabled]="!form.valid || isLoading">Create Account</button>
         <p class="note">Already have an account?<br/> <a [routerLink]="['/login']">Sign in here</a></p>
       </div>
     </form>

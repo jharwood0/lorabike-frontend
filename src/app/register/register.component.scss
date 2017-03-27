@@ -8,6 +8,16 @@
   width: 100%;
 }
 
+.errors-list{
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+  }
+
+.errors-list .errors-list-item{
+  color: $error;
+}
+
 .register {
   background: white;
   width: 380px;

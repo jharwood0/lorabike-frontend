@@ -5,6 +5,18 @@ import { Http, Headers } from '@angular/http';
 export class AuthService {
   constructor(private http: Http) { }
 
+  createUser(username, email, password){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.post('http://localhost:8080/api/user/', JSON.stringify({ username, email, password}), { headers })
+      .map(res => res.json())
+      .map((res) => {
+        console.log(res);
+        return res.success;
+      });
+  }
+
   getToken(){
     return localStorage.getItem('auth_token');
   }
