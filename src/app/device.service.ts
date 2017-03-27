@@ -15,7 +15,7 @@ export class DeviceService {
   constructor (private http: Http, private authService: AuthService) {
     let headers = new Headers({ 'Authorization': 'Bearer ' + this.authService.getToken()});
     let options = new RequestOptions({headers:headers});
-    this.devices = Observable.interval(1000)
+    this.devices = Observable.interval(5000)
       .switchMap(() => this.http.get("http://localhost:8080/api/device/", options))
       .map(res => res.json())
       .share(); /* stops re execution of get request for multiple subscribers */

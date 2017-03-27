@@ -3,6 +3,8 @@ import {Subscription} from "rxjs";
 import {MediaChange, ObservableMedia} from "@angular/flex-layout";
 import {Router, NavigationEnd} from "@angular/router";
 import * as screenfull from 'screenfull';
+import { User } from '../models/user';
+import { AuthService } from '../auth.service'
 
 @Component({
   selector: 'app-dashboard',
@@ -25,11 +27,13 @@ export class DashboardComponent implements OnInit {
   quickpanelOpen: boolean = false;
 
   isFullscreen: boolean = false;
+  currentUser : User
 
-  constructor(
-    private media: ObservableMedia,
-    private router: Router,
-  ) { }
+  constructor(private media: ObservableMedia, private router: Router, private authService : AuthService){
+    authService.getUser().then(result => {
+      this.currentUser = result;
+    });
+  }
 
   ngOnInit() {
     this._mediaSubscription = this.media.asObservable().subscribe((change: MediaChange) => {

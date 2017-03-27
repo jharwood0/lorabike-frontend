@@ -1,6 +1,15 @@
-<sebm-google-map [latitude]="lat" [longitude]="lng">
+<sebm-google-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+  <ng-container *ngFor="let device of devices">
+    <sebm-google-map-marker *ngIf="device.uplinks.length > 0" [latitude]="device.uplinks[device.uplinks.length-1].latitude" [longitude]="device.uplinks[device.uplinks.length-1].longitude" [label]="">
+      <sebm-google-map-info-window [disableAutoPan]="true">
+           {{device.name}}
+       </sebm-google-map-info-window>
+    </sebm-google-map-marker>
+  </ng-container>
+
   <sebm-google-map-polyline *ngFor="let device of devices">
-    <sebm-google-map-polyline-point *ngFor="let uplink of devices.uplinks" [latitude]="uplink.latitude" [longitude]="uplink.longitude">
+    <sebm-google-map-polyline-point *ngFor="let uplink of device.uplinks" [latitude]="uplink.latitude" [longitude]="uplink.longitude">
     </sebm-google-map-polyline-point>
   </sebm-google-map-polyline>
+
 </sebm-google-map>
