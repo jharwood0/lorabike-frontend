@@ -10,21 +10,15 @@ import { Device } from './models/device';
 
 @Injectable()
 export class DeviceService {
-  private deviceUrl = 'http://localhost:8080/api/device/';
-  constructor (private http: Http, private authService: AuthService) {}
+  public devices : Observable<Device[]>;
 
-  private createAuthHeader() : Headers {
-    let headers = new Headers();
-    headers.append('Authorization', `Bearer ${this.authService.getToken()}`);
-    console.log("Headers = "+headers.get('Authorization'));
-    return headers;
-  }
-  getDevices() : Observable<Device[]> {
-    let headers = this.createAuthHeader();
-    let options = new RequestOptions({ headers: headers });
-    return this.http.get(this.deviceUrl, options) /* Fix This */
-                    .map(this.extractData)
-                    .catch(this.handleError);
+  constructor (private http: Http, private authService: AuthService) {
+    let headers = new Headers({ 'Authorization': 'Bearer ' + this.authService.getToken()});
+    let options = new RequestOptions({headers:headers});
+    this.devices = Observable.interval(1000)
+      .switchMap(() => this.http.get("http://localhost:8080/api/device/", options))
+      .map(res => res.json())
+      .share(); /* stops re execution of get request for multiple subscribers */
   }
 
   private extractData(res: Response) {

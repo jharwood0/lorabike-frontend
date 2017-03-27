@@ -14,7 +14,7 @@ export class MapComponent implements OnInit {
   constructor(private deviceService : DeviceService) { }
 
   ngOnInit() {
-    this.deviceService.getDevices().subscribe(
+    this.deviceService.devices.subscribe(
       devices => {
         this.devices = devices;
         console.log(devices);

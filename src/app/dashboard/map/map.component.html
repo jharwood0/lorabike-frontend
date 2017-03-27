@@ -1,3 +1,6 @@
 <sebm-google-map [latitude]="lat" [longitude]="lng">
-  <sebm-google-map-marker [latitude]="lat" [longitude]="lng"></sebm-google-map-marker>
+  <sebm-google-map-polyline *ngFor="let device of devices">
+    <sebm-google-map-polyline-point *ngFor="let uplink of devices.uplinks" [latitude]="uplink.latitude" [longitude]="uplink.longitude">
+    </sebm-google-map-polyline-point>
+  </sebm-google-map-polyline>
 </sebm-google-map>
