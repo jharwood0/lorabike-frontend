@@ -6,4 +6,4 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 run `npm install` to download the dependencies for the project.
 
 ## Build
-Run `ng serve` to create the development server. Navigate to `http://localhost:4200` to view the website
+Run `ng serve` to create the development server. Navigate to `http://lora.bike:4200` to view the website
