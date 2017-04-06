@@ -12,7 +12,7 @@ export class AuthService {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    return this.http.post('http://localhost:8080/api/user/', JSON.stringify({ username, email, password}), { headers })
+    return this.http.post('http://lora.bike:8081/api/user/', JSON.stringify({ username, email, password}), { headers })
       .map(res => res.json())
       .map((res) => {
         console.log(res);
@@ -31,7 +31,7 @@ export class AuthService {
   getUser() : Promise<User> {
     let headers = new Headers({ 'Authorization': 'Bearer ' + this.getToken()});
     let options = new RequestOptions({headers:headers});
-    return this.http.get("http://localhost:8080/api/user/"+this.getId(), options)
+    return this.http.get("http://lora.bike:8081/api/user/"+this.getId(), options)
               .map(res => res.json())
               .map(user => {
                 return new User(user);
@@ -72,7 +72,8 @@ private handleError (error: Response | any) {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    return this.http.post('http://localhost:8080/api/user/authenticate', JSON.stringify({ username, password }), { headers })
+
+    return this.http.post('http://lora.bike:8081/api/user/authenticate', JSON.stringify({ username, password }), { headers })
       .map(res => res.json())
       .map((res) => {
         if (res.success) {
