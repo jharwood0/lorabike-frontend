@@ -27,4 +27,32 @@
 
   </div>
 
+  <div fxFlex class="mat-elevation-z2">
+
+    <table class="table table-hover table-bordered">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>DevEUI</th>
+        <th>Latitude</th>
+        <th>Longitude</th>
+        <th>Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let device of devices">
+        <td>{{ device.name }}</td>
+        <td>{{ device.devEUI}}</td>
+        <td *ngIf="device.uplinks.length > 0">{{ device.uplinks[device.uplinks.length-1].longitude }}</td>
+        <td *ngIf="device.uplinks.length <= 0">-</td>
+        <td *ngIf="device.uplinks.length > 0">{{ device.uplinks[device.uplinks.length-1].latitude }}</td>
+        <td *ngIf="device.uplinks.length <= 0">-</td>
+        <td *ngIf="device.uplinks.length > 0">Active</td>
+        <td *ngIf="device.uplinks.length <= 0">Inactive</td>
+      </tr>
+      </tbody>
+    </table>
+
+  </div>
+
 </div>
