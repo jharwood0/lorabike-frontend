@@ -16,7 +16,7 @@ export class DeviceService {
     let headers = new Headers({ 'Authorization': 'Bearer ' + this.authService.getToken()});
     let options = new RequestOptions({headers:headers});
     this.devices = Observable.interval(5000)
-      .switchMap(() => this.http.get("http://lora.bike:8081/api/device/", options))
+      .switchMap(() => this.http.get("http://lora.bike/api/device/", options))
       .map(res => res.json())
       .share(); /* stops re execution of get request for multiple subscribers */
   }
@@ -26,7 +26,7 @@ export class DeviceService {
     let options = new RequestOptions({headers:headers});
     headers.append('Content-Type', 'application/json');
 
-    return this.http.post('http://lora.bike:8081/api/device/', JSON.stringify({ name, devEUI, description }), options)
+    return this.http.post('http://lora.bike/api/device/', JSON.stringify({ name, devEUI, description }), options)
       .map(res => res.json())
       .map((res) => {
         return res.success;
