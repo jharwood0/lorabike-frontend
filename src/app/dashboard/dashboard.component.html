@@ -1,11 +1,5 @@
 <md-sidenav-container>
 
-  <md-sidenav class="quickpanel" [opened]="quickpanelOpen" align="end" mode="over" #quickpanel>
-
-    <ms-quickpanel></ms-quickpanel>
-
-  </md-sidenav>
-
   <md-sidenav class="sidenav" [opened]="sidenavOpen" align="start" [mode]="sidenavMode" msIconSidenav #sidenav>
 
     <ms-sidenav></ms-sidenav>
@@ -36,12 +30,6 @@
     <button fxHide="true" fxHide.gt-sm="false" md-button class="fullscreen-toggle" (click)="toggleFullscreen()">
       <md-icon *ngIf="!isFullscreen">fullscreen</md-icon>
       <md-icon *ngIf="isFullscreen">fullscreen_exit</md-icon>
-    </button>
-
-
-
-    <button md-button class="quickpanel-toggle" (click)="quickpanel.open()">
-      <md-icon>format_align_right</md-icon>
     </button>
 
 
