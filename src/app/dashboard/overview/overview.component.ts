@@ -35,13 +35,12 @@ export class OverviewComponent implements OnInit {
   }
 
   registerDevice() {
+    this.errors = new Array<Error>();
     this.isLoading = true;
     // check if deveui is valid
     var re = /[0-9A-Fa-f]{6}/g;
-
     if(!re.test(this.devEUI)) {
       this.isLoading = false;
-      this.errors = new Array<Error>();
       this.errors.push(new Error("Invalid DevEUI"));
     }else{
       this.deviceService.registerDevice(this.name, this.devEUI, this.description).subscribe((result) => {
@@ -53,8 +52,7 @@ export class OverviewComponent implements OnInit {
           this.description = "";
         }else{
           this.isLoading = false;
-          this.errors = new Array<Error>();
-          this.errors.push(new Error("Invalid request"));
+          this.errors.push(new Error("unable to contact TheThingsNet"));
         }
       });
     }
