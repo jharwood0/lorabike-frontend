@@ -21,6 +21,18 @@ export class DeviceService {
       .share(); /* stops re execution of get request for multiple subscribers */
   }
 
+  public registerDevice(name: string, devEUI: string, description: string){
+    let headers = new Headers({ 'Authorization': 'Bearer ' + this.authService.getToken()});
+    let options = new RequestOptions({headers:headers});
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.post('http://lora.bike:8081/api/device/', JSON.stringify({ name, devEUI, description }), options)
+      .map(res => res.json())
+      .map((res) => {
+        return res.success;
+      });
+  }
+
   private extractData(res: Response) {
     let body = res.json();
     return body.data || { };

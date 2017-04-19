@@ -1,15 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import { DeviceService } from '../../device.service';
 
+export class Error {
+  message: string;
+  constructor(message: string) {
+        this.message = message;
+    }
+}
+
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss']
 })
+
 export class OverviewComponent implements OnInit {
   devices : any[]
 
   constructor(private deviceService : DeviceService) { }
+
+  isLoading: boolean = false;
+
+  errors: Array<Error> = new Array<Error>();
+  name : string;
+  devEUI : string;
+  description : string;
 
   ngOnInit() {
     this.deviceService.devices.subscribe(
@@ -17,6 +32,32 @@ export class OverviewComponent implements OnInit {
         this.devices = devices;
       }
     );
+  }
+
+  registerDevice() {
+    this.isLoading = true;
+    // check if deveui is valid
+    var re = /[0-9A-Fa-f]{6}/g;
+
+    if(!re.test(this.devEUI)) {
+      this.isLoading = false;
+      this.errors = new Array<Error>();
+      this.errors.push(new Error("Invalid DevEUI"));
+    }else{
+      this.deviceService.registerDevice(this.name, this.devEUI, this.description).subscribe((result) => {
+        if(result){
+          this.isLoading = false;
+          // reset form
+          this.name = "";
+          this.devEUI = "";
+          this.description = "";
+        }else{
+          this.isLoading = false;
+          this.errors = new Array<Error>();
+          this.errors.push(new Error("Invalid request"));
+        }
+      });
+    }
   }
 
 }

@@ -19,7 +19,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MapComponent } from './dashboard/map/map.component';
 import { OverviewComponent } from './dashboard/overview/overview.component';
 
-import { QuickpanelComponent } from './components/quickpanel/quickpanel.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { SidenavItemComponent } from './components/sidenav-item/sidenav-item.component';
 import { BreadcrumbsComponent } from './components/breadcrumb/breadcrumb.component';
@@ -67,7 +66,6 @@ const appRoutes = [
     MapComponent,
     OverviewComponent,
     DashboardComponent,
-    QuickpanelComponent,
     SidenavComponent,
     SidenavItemComponent,
     BreadcrumbsComponent,

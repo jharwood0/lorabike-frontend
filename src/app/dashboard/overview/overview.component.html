@@ -2,7 +2,16 @@
   <md-card fxFlex.gt-md="300px" style="margin-right: 16px;">
     <md-card-title>Register Device</md-card-title>
     <md-card-content fxLayout="column">
-      <form #form="ngForm" (ngSubmit)="login()">
+      <div>
+      <md-progress-bar *ngIf="isLoading" class="example-margin" [color]="'primary'" [mode]="'indeterminate'">
+      </md-progress-bar>
+    </div>
+    <div fxLayout="column" fxLayoutAlign="center center">
+      <ul class="errors-list" *ngIf="errors.length >= 1">
+        <li class="errors-list-item" *ngFor="let error of errors">{{error.message}}</li>
+      </ul>
+    </div>
+      <form #form="ngForm" (ngSubmit)="registerDevice()">
       <div class="login-content" fxLayout="column" fxLayoutAlign="start stretch">
         <md-input-container>
           <input mdInput placeholder="Name" type="text" name="name" required [(ngModel)]="name">

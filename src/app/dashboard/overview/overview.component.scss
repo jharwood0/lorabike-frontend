@@ -1,3 +1,4 @@
+@import "../../../styles/_var";
 :host {
   display: block;
   margin: 36px;
@@ -9,4 +10,13 @@
   width: 40px;
   padding-left: 24px;
   padding-right: 8px;
+}
+.errors-list{
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+  }
+
+.errors-list .errors-list-item{
+  color: $error;
 }
