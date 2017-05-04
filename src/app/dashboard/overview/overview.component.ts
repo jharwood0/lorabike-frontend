@@ -30,6 +30,17 @@ export class OverviewComponent implements OnInit {
     this.deviceService.devices.subscribe(
       devices => {
         this.devices = devices;
+        for(let device of this.devices){
+          if(device.uplinks.length > 0){
+            if(device.uplinks[device.uplinks.length-1].timestamp >= (Date.now() - 10000000)){
+              device.active = true;
+            }else{
+              device.active = false;
+            }
+          }else{
+            device.active = false;
+          }
+        }
       }
     );
   }

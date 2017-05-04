@@ -44,12 +44,12 @@
       <tr *ngFor="let device of devices">
         <td>{{ device.name }}</td>
         <td>{{ device.devEUI}}</td>
-        <td *ngIf="device.uplinks.length > 0">{{ device.uplinks[device.uplinks.length-1].longitude }}</td>
-        <td *ngIf="device.uplinks.length <= 0">-</td>
         <td *ngIf="device.uplinks.length > 0">{{ device.uplinks[device.uplinks.length-1].latitude }}</td>
         <td *ngIf="device.uplinks.length <= 0">-</td>
-        <td *ngIf="device.uplinks.length > 0">Active</td>
-        <td *ngIf="device.uplinks.length <= 0">Inactive</td>
+        <td *ngIf="device.uplinks.length > 0">{{ device.uplinks[device.uplinks.length-1].longitude }}</td>
+        <td *ngIf="device.uplinks.length <= 0">-</td>
+        <td *ngIf="device.active">Active</td>
+        <td *ngIf="!device.active">Inactive</td>
       </tr>
       </tbody>
     </table>
